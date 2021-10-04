@@ -1,0 +1,159 @@
+#!/bin/bash
+
+set -e
+
+#
+# START FUNCTIONS (alphabetical order)
+#
+
+checkForEnvVariable() {
+  varval=${!1}
+  if [ ! "$(echo $varval)" ]; then
+    cat <<EOF
+
+ERROR
+
+    A required environment variable is not available:
+    $1
+
+EOF
+    exit 1
+  fi
+}
+
+create() {
+  newEntry() {
+    headerText="$@"
+    result="${TEMPLATE_TEXT}"
+    result="${result/HEADERTEXT/$headerText}"
+    result="${result/TIMESTAMP/$timestamp}"
+    echo -e "$result\n\n"
+  }
+  TEMPLATE_TEXT=""
+  if [ -f "${NOTED_TEMPLATE_FILE}" ]; then
+    # use template file
+    TEMPLATE_TEXT=$(<"${NOTED_TEMPLATE_FILE}")
+  else
+    read -r -d '' TEMPLATE_TEXT <<EOF || true
+---
+TIMESTAMP
+
+# HEADERTEXT
+
+
+---
+
+EOF
+  fi
+  mkdir -p "${NOTED_MARKDOWN_HOME}"
+  markdownFile "${currDate}"
+  if [[ -n "${OPTIONAL_FILE}" ]]; then
+    markdownFile="${NOTED_MARKDOWN_HOME}/${OPTIONAL_FILE}"
+  fi
+  touch "${markdownFile}"
+  if [ -n "${OPTIONAL_NOTE}" ]; then
+    # Supplying a note means automatically add that to the file
+    newEntry "${OPTIONAL_NOTE}" >>"${markdownFile}"
+  else
+    # otherwise open it up with the template and let them edit
+    newEntry >>"${markdownFile}"
+    edit "${markdownFile}"
+  fi
+}
+
+edit() {
+  open "${markdownFile}"
+}
+
+loadProperties() {
+  if [[ -f "${CONFIG_FILE}" ]]; then
+    source "${CONFIG_FILE}"
+  fi
+}
+
+markdownFile() {
+  markdownFile="${NOTED_MARKDOWN_HOME}/${1}.md"
+}
+
+outputConfig() {
+  echo "The following configuration is currently being used:"
+  echo "NOTED_MARKDOWN_HOME=${NOTED_MARKDOWN_HOME}"
+  echo "NOTED_FILE_NAME_DATE_FORMAT=${NOTED_FILE_NAME_DATE_FORMAT}"
+  echo "NOTED_TIMESTAMP_FORMAT=${NOTED_TIMESTAMP_FORMAT}"
+  echo "NOTED_TEMPLATE_FILE=${NOTED_TEMPLATE_FILE:-<<DEFAULT>>}"
+}
+
+validate() {
+  if [ -z "$1" ]; then
+    echo "${2}"
+    exit 1
+  fi
+}
+
+version() {
+  echo "noted v${VERSION}"
+}
+
+view() {
+  open "${htmlFile}"
+}
+
+#
+# END FUNCTIONS
+#
+
+VERSION="0.0.1"
+
+#
+# Default Settings
+#
+# Settings that cannot be overridden
+# Location of config file
+CONFIG_FILE=$HOME/.notedconfig
+
+# Settings that can be overridden from properties
+# name files like this
+NOTED_FILE_NAME_DATE_FORMAT="+%Y-%m-%d"
+# timestamp entries within the files like this
+NOTED_TIMESTAMP_FORMAT="+%H:%M:%S UTC"
+NOTED_TEMPLATE_FILE=""
+# keep the directory where notes are stored here
+NOTED_MARKDOWN_HOME=$HOME/Documents/notes
+
+#
+# Override with any additional settings
+#
+loadProperties
+
+currDate=$(date "${NOTED_FILE_NAME_DATE_FORMAT}")
+timestamp=$(date "${NOTED_TIMESTAMP_FORMAT}")
+
+todaysFile="${NOTED_MARKDOWN_HOME}/${currDate}.md"
+
+subcommand="$1"
+if  [[ "${subcommand}" == "config" ]]; then
+  outputConfig
+elif [[ "${subcommand}" == "version" ]]; then
+  version
+elif [[ "${subcommand}" == "edit" ]] || [[ "${subcommand}" == "view" ]]; then
+  arg="$2"
+  if [[ -z "${arg}" ]]; then
+    arg="${currDate}"
+  fi
+  markdownFile "${arg}"
+  edit "${markdownFile}"
+else
+  # create / default
+  OPTIONAL_FILE=""
+  OPTIONAL_NOTE=""
+  if [[ "${subcommand}" == "create" ]]; then
+    shift
+  fi
+  if [[ -n "$1" ]]; then
+    OPTIONAL_NOTE="$1"
+  fi
+  if [[ -n "$2" ]]; then
+    OPTIONAL_FILE="$2"
+  fi
+  create "${OPTIONAL_NOTE}" "${OPTIONAL_FILE}"
+fi
