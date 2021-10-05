@@ -84,6 +84,7 @@ outputConfig() {
   echo "NOTED_FILE_NAME_DATE_FORMAT=${NOTED_FILE_NAME_DATE_FORMAT}"
   echo "NOTED_TIMESTAMP_FORMAT=${NOTED_TIMESTAMP_FORMAT}"
   echo "NOTED_TEMPLATE_FILE=${NOTED_TEMPLATE_FILE:-<<DEFAULT>>}"
+  echo "NOTED_TODO_MARKER=${NOTED_TODO_MARKER}"
 }
 
 validate() {
@@ -105,7 +106,7 @@ view() {
 # END FUNCTIONS
 #
 
-VERSION="0.0.2"
+VERSION="0.0.3"
 
 #
 # Default Settings
@@ -122,6 +123,7 @@ NOTED_TIMESTAMP_FORMAT="+%H:%M:%S UTC"
 NOTED_TEMPLATE_FILE=""
 # keep the directory where notes are stored here
 NOTED_MARKDOWN_HOME=$HOME/Documents/notes
+NOTED_TODO_MARKER="TODO"
 
 #
 # Override with any additional settings
@@ -148,6 +150,10 @@ elif [[ "${subcommand}" == "edit" ]] || [[ "${subcommand}" == "view" ]]; then
 elif [[ "${subcommand}" == "grep" ]]; then
   shift
   ngrep "$@"
+elif [[ "${subcommand}" == 'todos' ]]; then
+  fgrep -rH "${NOTED_TODO_MARKER}" "${NOTED_MARKDOWN_HOME}" | fgrep -v ~~
+  if [ 1 == $? ]; then echo "Congratulations! No TODOs found!"; fi
+  echo
 else
   # create / default
   OPTIONAL_FILE=""
