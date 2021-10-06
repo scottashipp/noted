@@ -7,59 +7,57 @@ All uses of `noted` require a subcommand. If one is not supplied, the default `c
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [List of Subcommands](#list-of-subcommands)
-  - [config](#config)
-    - [Synopsis](#synopsis)
-    - [Overview](#overview)
-    - [Arguments & Flags](#arguments--flags)
-    - [Examples](#examples)
-  - [create](#create)
-    - [Synopsis](#synopsis-1)
-    - [Overview](#overview-1)
-    - [Arguments & Flags](#arguments--flags-1)
-    - [Examples](#examples-1)
-  - [edit / view](#edit--view)
-    - [Synopsis](#synopsis-2)
-    - [Overview](#overview-2)
-    - [Arguments & Flags](#arguments--flags-2)
-    - [Examples](#examples-2)
-  - [grep](#grep)
-    - [Synopsis](#synopsis-3)
-    - [Overview](#overview-3)
-    - [Arguments & Flags](#arguments--flags-3)
-    - [Examples](#examples-3)
-  - [version](#version)
-    - [Synopsis](#synopsis-4)
-    - [Overview](#overview-4)
-    - [Arguments & Flags](#arguments--flags-4)
-    - [Examples](#examples-4)
+- [config](#config)
+  - [Synopsis](#synopsis)
+  - [Overview](#overview)
+  - [Arguments & Flags](#arguments--flags)
+  - [Examples](#examples)
+- [create](#create)
+  - [Synopsis](#synopsis-1)
+  - [Overview](#overview-1)
+  - [Arguments & Flags](#arguments--flags-1)
+  - [Examples](#examples-1)
+- [edit / view](#edit--view)
+  - [Synopsis](#synopsis-2)
+  - [Overview](#overview-2)
+  - [Arguments & Flags](#arguments--flags-2)
+  - [Examples](#examples-2)
+- [grep](#grep)
+  - [Synopsis](#synopsis-3)
+  - [Overview](#overview-3)
+  - [Arguments & Flags](#arguments--flags-3)
+  - [Examples](#examples-3)
+- [version](#version)
+  - [Synopsis](#synopsis-4)
+  - [Overview](#overview-4)
+  - [Arguments & Flags](#arguments--flags-4)
+  - [Examples](#examples-4)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## List of Subcommands
 
-### config
+## config
 
 Lists the current configuration for _noted_. This is the combination of default values plus whatever is found in `$HOME/.notedconfig`, where values
 in `$HOME/.notedconfig` take precedence.
 
-#### Synopsis
+### Synopsis
 
 ```shell
 noted config  
 ```
 
-#### Overview
+### Overview
 
 The config subcommand will:
 
 - Generate a quick view of the resulting configuration after applying the values in `$HOME/.notedconfig`
 
-#### Arguments & Flags
+### Arguments & Flags
 
 N/A
 
-#### Examples
+### Examples
 
 View configuration:
 
@@ -67,17 +65,17 @@ View configuration:
 noted config
 ```
 
-### create
+## create
 
 Create a new note.
 
-#### Synopsis
+### Synopsis
 
 ```shell
 noted create [Quoted text to use (optional)] [ALTERNATE_FILE_NAME (optional)] 
 ```
 
-#### Overview
+### Overview
 
 The create subcommand will:
 
@@ -91,13 +89,13 @@ The create subcommand will:
 > We encourage users to omit `create` and use the alternate shorthand `noted` without the create keyword. The remainder
 > of this documentation will use the shorthand.
 
-#### Arguments & Flags
+### Arguments & Flags
 
 Both arguments are optional. When quoted text is included the text will automatically be appended to the entry and editing of the entry will be skipped. When
 the `ALTERNATE_FILE_NAME` argument is supplied with a filename, then instead of using the automatic file (named with today's date), the file supplied will be
 used.
 
-#### Examples
+### Examples
 
 Start a new entry:
 
@@ -117,11 +115,11 @@ Start a new entry in the file named `process.md`:
 noted 'Some note' process.md
 ```
 
-### edit / view
+## edit / view
 
 Open a specific note file, or today's file if no file is specified, in the default editor.
 
-#### Synopsis
+### Synopsis
 
 ```shell
 noted edit [FILE (optional)] 
@@ -131,7 +129,7 @@ noted edit [FILE (optional)]
 noted view [FILE (optional)] 
 ```
 
-#### Overview
+### Overview
 
 Edit and view are interchangeable.
 
@@ -145,11 +143,11 @@ The edit / view subcommand will:
 > Edit is different than create. Create will also populate a new note entry into the given file using the template.
 > Edit, on the other hand, will merely open the file.
 
-#### Arguments & Flags
+### Arguments & Flags
 
 The `FILE` argument is optional. You should not include the extension. The Markdown extension `.md` is assumed.
 
-#### Examples
+### Examples
 
 Open today's file in the default editor.
 
@@ -169,28 +167,28 @@ Open a file named `process.md`:
 noted view process
 ```
 
-### grep
+## grep
 
 Shortcut for running a recursive grep in your configured notes directory.
 
-#### Synopsis
+### Synopsis
 
 ```shell
 noted grep [ARGUMENTS (optional)] [SEARCH_TERM (required)] 
 ```
 
-#### Overview
+### Overview
 
 Runs `grep -r [NOTED_MARKDOWN_HOME]` and also passes along any arguments you supply.
 
 > REMINDER:
 > `$NOTED_MARKDOWN_HOME` is configured to `$HOME/Documents/notes` by default but can be overridden in the `$HOME/.notedconfig` file. See the [configuration guide](README.md#configuration-guide) for more.
 
-#### Arguments & Flags
+### Arguments & Flags
 
 Any arguments that grep accepts can be passed.
 
-#### Examples
+### Examples
 
 Perform a case-insensitive search for the term "Java." 
 
@@ -204,25 +202,25 @@ Perform a search for "Jenkins" and show line numbers:
 noted grep Jenkins -n
 ```
 
-### version
+## version
 
 View the current version of `noted`.
 
-#### Synopsis
+### Synopsis
 
 ```shell
 noted version 
 ```
 
-#### Overview
+### Overview
 
 The version subcommand will print out the current version of `noted`.
 
-#### Arguments & Flags
+### Arguments & Flags
 
 N/A
 
-#### Examples
+### Examples
 
 View the version:
 
