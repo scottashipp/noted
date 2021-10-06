@@ -4,27 +4,37 @@ All uses of `noted` require a subcommand. If one is not supplied, the default `c
 
 ## Contents
 
-* [List of Subcommands](#list-of-subcommands)
-    + [config](#config)
-        - [Synopsis](#synopsis)
-        - [Overview](#overview)
-        - [Arguments & Flags](#arguments---flags)
-        - [Examples](#examples)
-    + [create](#create)
-        - [Synopsis](#synopsis-1)
-        - [Overview](#overview-1)
-        - [Arguments & Flags](#arguments---flags-1)
-        - [Examples](#examples-1)
-    + [edit / view](#edit---view)
-        - [Synopsis](#synopsis-2)
-        - [Overview](#overview-2)
-        - [Arguments & Flags](#arguments---flags-2)
-        - [Examples](#examples-2)
-    + [version](#version)
-        - [Synopsis](#synopsis-3)
-        - [Overview](#overview-3)
-        - [Arguments & Flags](#arguments---flags-3)
-        - [Examples](#examples-3)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [List of Subcommands](#list-of-subcommands)
+  - [config](#config)
+    - [Synopsis](#synopsis)
+    - [Overview](#overview)
+    - [Arguments & Flags](#arguments--flags)
+    - [Examples](#examples)
+  - [create](#create)
+    - [Synopsis](#synopsis-1)
+    - [Overview](#overview-1)
+    - [Arguments & Flags](#arguments--flags-1)
+    - [Examples](#examples-1)
+  - [edit / view](#edit--view)
+    - [Synopsis](#synopsis-2)
+    - [Overview](#overview-2)
+    - [Arguments & Flags](#arguments--flags-2)
+    - [Examples](#examples-2)
+  - [grep](#grep)
+    - [Synopsis](#synopsis-3)
+    - [Overview](#overview-3)
+    - [Arguments & Flags](#arguments--flags-3)
+    - [Examples](#examples-3)
+  - [version](#version)
+    - [Synopsis](#synopsis-4)
+    - [Overview](#overview-4)
+    - [Arguments & Flags](#arguments--flags-4)
+    - [Examples](#examples-4)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## List of Subcommands
 
@@ -157,6 +167,41 @@ Open a file named `process.md`:
 
 ```shell
 noted view process
+```
+
+### grep
+
+Shortcut for running a recursive grep in your configured notes directory.
+
+#### Synopsis
+
+```shell
+noted grep [ARGUMENTS (optional)] [SEARCH_TERM (required)] 
+```
+
+#### Overview
+
+Runs `grep -r [NOTED_MARKDOWN_HOME]` and also passes along any arguments you supply.
+
+> REMINDER:
+> `$NOTED_MARKDOWN_HOME` is configured to `$HOME/Documents/notes` by default but can be overridden in the `$HOME/.notedconfig` file. See the [configuration guide](README.md#configuration-guide) for more.
+
+#### Arguments & Flags
+
+Any arguments that grep accepts can be passed.
+
+#### Examples
+
+Perform a case-insensitive search for the term "Java." 
+
+```shell
+noted grep -i java
+```
+
+Perform a search for "Jenkins" and show line numbers:
+
+```shell
+noted grep Jenkins -n
 ```
 
 ### version

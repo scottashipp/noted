@@ -75,6 +75,10 @@ markdownFile() {
   markdownFile="${NOTED_MARKDOWN_HOME}/${1}.md"
 }
 
+ngrep() {
+  grep --recursive "$@" "${NOTED_MARKDOWN_HOME}"
+}
+
 outputConfig() {
   echo "The following configuration is currently being used:"
   echo "NOTED_MARKDOWN_HOME=${NOTED_MARKDOWN_HOME}"
@@ -102,7 +106,7 @@ view() {
 # END FUNCTIONS
 #
 
-VERSION="0.0.1"
+VERSION="0.0.2"
 
 #
 # Default Settings
@@ -142,6 +146,9 @@ elif [[ "${subcommand}" == "edit" ]] || [[ "${subcommand}" == "view" ]]; then
   fi
   markdownFile "${arg}"
   edit "${markdownFile}"
+elif [[ "${subcommand}" == "grep" ]]; then
+  shift
+  ngrep "$@"
 else
   # create / default
   OPTIONAL_FILE=""

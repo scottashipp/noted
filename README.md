@@ -1,20 +1,28 @@
+
+
 # noted
 
 _Lightweight CLI for taking markdown notes in a journal-like (time-seried) fashion on macOS._
 
 ## Contents
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 - [Features](#features)
 - [Getting Started](#getting-started)
-    * [Required steps](#required-steps)
-    * [Optional steps](#optional-steps)
+  - [Required steps](#required-steps)
+  - [Optional steps](#optional-steps)
 - [Typical usage](#typical-usage)
 - [Subcommand reference](#subcommand-reference)
 - [Configuration guide](#configuration-guide)
-    * [Default values](#default-values)
-    * [Configuring custom values](#configuring-custom-values)
-    * [Custom template file](#custom-template-file)
+  - [Default values](#default-values)
+  - [Configuring custom values](#configuring-custom-values)
+  - [Custom template file](#custom-template-file)
 - [Recommended aliases](#recommended-aliases)
+- [Usage with a static site generator](#usage-with-a-static-site-generator)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Features
 
