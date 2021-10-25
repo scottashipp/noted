@@ -21,6 +21,7 @@ _Lightweight CLI for taking markdown notes in a journal-like (time-seried) fashi
   - [Custom template file](#custom-template-file)
 - [Recommended aliases](#recommended-aliases)
 - [Usage with a static site generator](#usage-with-a-static-site-generator)
+- [Change default editor](#change-default-editor)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -213,3 +214,19 @@ Besides supplying a custom configuration, you probably want to add the following
 Some people may prefer to use `noted` with a static site generator like [mkdocs](https://www.mkdocs.org)
 , [Maven site](https://maven.apache.org/plugins/maven-site-plugin/), or [Hugo](https://gohugo.io/). Those are just a few examples. Doing so will allow you to
 view your notes in HTML format locally.
+
+## Change default editor
+`noted` used `open` command to edit a markdown file. Usually `open` command is an alias and can be changed using the following commands.
+
+
+Add a new alternative to `open` command:
+
+```
+sudo update-alternatives --install /usr/bin/open open <path> <priority>
+```
+
+Choose the new alternative
+
+```
+sudo update-alternatives --config open
+```
