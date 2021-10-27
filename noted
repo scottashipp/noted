@@ -27,7 +27,7 @@ create() {
     result="${TEMPLATE_TEXT}"
     result="${result/HEADERTEXT/$headerText}"
     result="${result/TIMESTAMP/$timestamp}"
-    echo -e "$result\n\n"
+    echo -e "\n$result\n"
   }
   TEMPLATE_TEXT=""
   if [ -f "${NOTED_TEMPLATE_FILE}" ]; then
@@ -42,7 +42,6 @@ TIMESTAMP
 
 
 ---
-
 EOF
   fi
   mkdir -p "${NOTED_MARKDOWN_HOME}"
