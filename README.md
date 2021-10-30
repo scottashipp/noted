@@ -53,7 +53,7 @@ cd $HOME/Documents
 3. Clone this repository to your Documents folder.
 
 ```shell
-git clone git@github.com:scottashipp/noted.git -C $HOME/Documents
+git -C $HOME/Documents clone git@github.com:scottashipp/noted.git
 ```
 
 4. Symlink the file:
@@ -62,7 +62,7 @@ git clone git@github.com:scottashipp/noted.git -C $HOME/Documents
 ln -s $HOME/Documents/noted/noted /usr/local/bin/noted
 ```
 
-6. Verify that it is visible on the path:
+5. Verify that it is visible on the path:
 
 ```shell
 noted version
