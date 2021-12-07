@@ -27,11 +27,16 @@ All uses of `noted` require a subcommand. If one is not supplied, the default `c
   - [Overview](#overview-3)
   - [Arguments & Flags](#arguments--flags-3)
   - [Examples](#examples-3)
-- [version](#version)
+- [todos](#todos)
   - [Synopsis](#synopsis-4)
   - [Overview](#overview-4)
   - [Arguments & Flags](#arguments--flags-4)
   - [Examples](#examples-4)
+- [version](#version)
+  - [Synopsis](#synopsis-5)
+  - [Overview](#overview-5)
+  - [Arguments & Flags](#arguments--flags-5)
+  - [Examples](#examples-5)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -200,6 +205,36 @@ Perform a search for "Jenkins" and show line numbers:
 
 ```shell
 noted grep Jenkins -n
+```
+
+## todos
+
+Lists any todos that you have previously saved in your notes.
+
+### Synopsis
+
+```shell
+noted todos 
+```
+
+### Overview
+
+Runs a recursive grep in your configured notes directory for the value configured in `NOTED_TODO_MARKER`, excluding
+results that contain strikethrough text (markdown value of `~~`) as a means of detecting "crossed-out" todo items.
+
+> REMINDER:
+> `NOTED_TODO_MARKER` is configured to `TODO` by default but can be overridden in the `$HOME/.notedconfig` file. See the [configuration guide](README.md#configuration-guide) for more.
+
+### Arguments & Flags
+
+N/A
+
+### Examples
+
+View any TODO items that are not crossed-out:
+
+```shell
+noted todos
 ```
 
 ## version

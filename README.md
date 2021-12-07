@@ -44,35 +44,29 @@ Getting started with _Noted_ only requires that `noted` is placed on your path.
 A good standard way to do this is to symlink the `noted` script to `/usr/local/bin` as follows.
 
 1. Open a terminal.
-2. Change to your `Documents` directory.
-
-```shell
-cd $HOME/Documents
-```
-
-3. Clone this repository to your Documents folder.
+2. Clone this repository to your Documents folder.
 
 ```shell
 git -C $HOME/Documents clone git@github.com:scottashipp/noted.git
 ```
 
-4. Symlink the file:
+3. Symlink the file:
 
 ```shell
 ln -s $HOME/Documents/noted/noted /usr/local/bin/noted
 ```
 
-5. Verify that it is visible on the path:
+4. Verify that it is visible on the path:
 
 ```shell
 noted version
 ```
 
-If the above outputs `noted v0.0.1` then all is well. Check out the [Typical usage](#typical-usage) section below to take your first notes!
+If the above outputs `noted v0.0.3` then all is well. Check out the [Typical usage](#typical-usage) section below to take your first notes!
 
 ### Optional steps
 
-You may want to follow the [configuration guide](#configuration-guide) if you do not like the defaults.
+You may want to follow the [configuration guide](#configuration-guide) if you do not like [the defaults](#default-values).
 
 ## Typical usage
 
@@ -133,8 +127,18 @@ You now have a source-controlled, time-seried journal of events. Most importantl
 
 ## Subcommand reference
 
-_Noted_ works like many other CLI's, through the use of subcommands. It currently supports config, create, edit, version, and view. These are fully-specified in
-the [subcommand reference](subcommands.md)
+_Noted_ works like many other CLI's, through the use of subcommands. Subcommands are fully-specified in the [subcommand reference](subcommands.md).
+
+> NOTE: You can find detailed information about each subcommand in the [subcommand reference](subcommands.md). Skip to a specific subcommand using the list below. 
+
+Noted currently supports the following commands:
+
+- [config](subcommands.md#config)
+- [create](subcommands.md#create)
+- [edit/view](subcommands.md#edit--view)
+- [todos](subcommands.md#todos)
+- [version](subcommands.md#version)
+- [view](subcommands.md#edit--view)
 
 ## Configuration guide
 
@@ -148,6 +152,7 @@ The following default values are configured.
 | NOTED_FILE_NAME_DATE_FORMAT | The date format string used as the file name for new notes. | `"+%Y-%m-%d"` | 
 | NOTED_TIMESTAMP_FORMAT | The timestamp format for the timestamp placed on new entries. | `"+%H:%M:%S UTC"` |
 | NOTED_TEMPLATE_FILE | A file containing a Markdown-formatted entry template to use. | `""` <br /> (It is empty by default. Which means the script's own default template will be used.) |
+| NOTED_TODO_MARKER | A string that indicates the following text is a TODO item. This text is searched for by the `todos` command. | `TODO` |
 
 ### Configuring custom values
 
@@ -164,6 +169,7 @@ NOTED_FILE_NAME_DATE_FORMAT="+%m-%d-%Y"
 NOTED_TIMESTAMP_FORMAT="+%H:%M:%S Pacific"
 # Use my own template file
 NOTED_TEMPLATE_FILE=$HOME/Documents/mynotes/template.md
+NOTED_TODO_MARKER="REMINDER:"
 ```
 
 Both the `NOTED_FILE_NAME_DATE_FORMAT` and the `NOTED_TIMESTAMP_FORMAT` are format strings as specified by the `date` shell command. You can learn more about
