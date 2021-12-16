@@ -136,6 +136,7 @@ Noted currently supports the following commands:
 - [config](subcommands.md#config)
 - [create](subcommands.md#create)
 - [edit/view](subcommands.md#edit--view)
+- [grep](subcommands.md#grep)
 - [todos](subcommands.md#todos)
 - [version](subcommands.md#version)
 - [view](subcommands.md#edit--view)
